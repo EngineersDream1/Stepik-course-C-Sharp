@@ -11,7 +11,7 @@
             Street = street;
         }   
         
-        public Location Of(string city, string street)
+        public static Location Of(string city, string street)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(city);
             ArgumentException.ThrowIfNullOrWhiteSpace(street);
