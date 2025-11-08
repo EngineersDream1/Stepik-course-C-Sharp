@@ -1,12 +1,7 @@
 ﻿using Infrastructure.Data.DataBaseContext;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure.Data.Extensions
 {
@@ -31,7 +26,9 @@ namespace Infrastructure.Data.Extensions
 
         private static async Task SeedTopicsAsync(ApplicationDbContext dbContext)
         {
-            if(! await dbContext.Topics.AnyAsync())
+            var test = await dbContext.Topics.AnyAsync();
+
+            if (! await dbContext.Topics.AnyAsync())
             {
                 await dbContext.Topics.AddRangeAsync(InitialData.Topics);
                 await dbContext.SaveChangesAsync();

@@ -2,6 +2,7 @@
 using Domain.Models;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Infrastructure.Data.DataBaseContext
 {
@@ -16,21 +17,10 @@ namespace Infrastructure.Data.DataBaseContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Topic>()
-                .Property(topic => topic.Id)
-                .HasConversion(
-                    id => id.Value,
-                    value => TopicId.Of(value)
-                );
-
-            modelBuilder.Entity<Topic>()
-                .OwnsOne(Topic => Topic.Location, location =>
-                {
-                    location.Property(l => l.City).HasColumnName("City");
-                    location.Property(l => l.Street).HasColumnName("Street");
-                });
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                Assembly.GetExecutingAssembly()
+            );      
         }
     }
 }
