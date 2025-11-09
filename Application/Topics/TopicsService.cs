@@ -1,4 +1,6 @@
 ﻿using Application.Data.DataBaseContext;
+using Application.Dtos;
+using Application.Extensions;
 using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,7 +13,7 @@ namespace Application.Topics
 {
     public class TopicsService(IApplicationDbContext dbContext, ILogger<TopicsService> logger) : ITopicsService
     {        
-        public Task<Topic> CreateTopicAsync(Topic topicRequestDto)
+        public Task<TopicResponseDto> CreateTopicAsync(CreateTopicRequestDto topicRequestDto)
         {
             throw new NotImplementedException();
         }
@@ -21,21 +23,21 @@ namespace Application.Topics
             throw new NotImplementedException();
         }
 
-        public Task<Topic> GetTopicAsync(Guid id)
+        public Task<TopicResponseDto> GetTopicAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<Topic>> GetTopicsAsync()
+        public async Task<List<TopicResponseDto>> GetTopicsAsync()
         {
             var topics = await dbContext.Topics
                     .AsNoTracking()
                     .ToListAsync();
 
-            return topics;
+            return topics.ToTopicResponseDtoList();
         }
 
-        public Task<Topic> UpdateTopicAsync(Guid id, Topic topicRequestDto)
+        public Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicRequestDto topicRequestDto)
         {
             throw new NotImplementedException();
         }
