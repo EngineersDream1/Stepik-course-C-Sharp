@@ -1,4 +1,5 @@
-﻿using Domain.ValueObjects;
+﻿using Application.Dtos;
+using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Application.Topics
 {
     public interface ITopicsService
     {
-        Task<List<Topic>> GetTopicsAsync();
-        Task<Topic> GetTopicAsync(Guid id);
-        Task<Topic> CreateTopicAsync(Topic topicRequestDto);
-        Task<Topic> UpdateTopicAsync(Guid id, Topic topicRequestDto);
+        Task<List<TopicResponseDto>> GetTopicsAsync();
+        Task<TopicResponseDto> GetTopicAsync(Guid id);
+        Task<TopicResponseDto> CreateTopicAsync(CreateTopicRequestDto topicRequestDto);
+        Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicRequestDto topicRequestDto);
         Task DeleteTopicAsync(Guid id);
     }
 }
