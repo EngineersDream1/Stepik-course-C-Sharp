@@ -1,4 +1,5 @@
-﻿using Infrastructure.Data.DataBaseContext;
+﻿using Application.Data.DataBaseContext;
+using Infrastructure.Data.DataBaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,8 @@ namespace Infrastructure
             {
                 options.UseSqlite(connectionString);
             });
+
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
             return services;
         }
