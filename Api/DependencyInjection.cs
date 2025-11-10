@@ -1,4 +1,5 @@
-﻿using Infrastructure.Data.Extensions;
+﻿using Api.Exception.Handler;
+using Infrastructure.Data.Extensions;
 
 namespace Api
 {
@@ -6,6 +7,7 @@ namespace Api
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddExceptionHandler<CustomExceptionHandler>();
             services.AddControllers();
             services.AddOpenApi();
 
@@ -18,6 +20,7 @@ namespace Api
             {
                 app.MapOpenApi();             
             }
+            app.UseExceptionHandler(options => { });
 
             app.UseHttpsRedirection();
             app.UseAuthorization();

@@ -1,11 +1,13 @@
 ﻿using Application.Data.DataBaseContext;
 using Application.Dtos;
+using Application.Exceptions;
 using Application.Extensions;
 using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +25,17 @@ namespace Application.Topics
             throw new NotImplementedException();
         }
 
-        public Task<TopicResponseDto> GetTopicAsync(Guid id)
+        public async Task<TopicResponseDto> GetTopicAsync(Guid id)
         {
-            throw new NotImplementedException();
+            TopicId topicId = TopicId.Of(id);
+            var result = await dbContext.Topics.FindAsync([topicId]);
+
+            if(result is null)
+            {
+                throw new TopicNotFoundException(id);
+            }
+
+            return result.ToTopicResponseDto();
         }
 
         public async Task<List<TopicResponseDto>> GetTopicsAsync()
