@@ -12,7 +12,7 @@ namespace Application.Topics
     {
         Task<List<TopicResponseDto>> GetTopicsAsync();
         Task<TopicResponseDto> GetTopicAsync(Guid id);
-        Task<TopicResponseDto> CreateTopicAsync(CreateTopicRequestDto topicRequestDto);
+        Task<TopicResponseDto> CreateTopicAsync(CreateTopicRequestDto dto);
         Task<TopicResponseDto> UpdateTopicAsync(Guid id, UpdateTopicRequestDto topicRequestDto);
         Task DeleteTopicAsync(Guid id);
     }

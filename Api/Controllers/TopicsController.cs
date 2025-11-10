@@ -22,5 +22,11 @@ namespace API.Controllers
         {
             return Ok(await topicsService.GetTopicAsync(id));
         }
+
+        [HttpPost]
+        public async Task<ActionResult<TopicResponseDto>> CreateTopic(CreateTopicRequestDto dto)
+        {
+            return Ok(await topicsService.CreateTopicAsync(dto));
+        }
     }
 }
