@@ -1,17 +1,4 @@
-﻿using Application.Data.DataBaseContext;
-using Application.Dtos;
-using Application.Exceptions;
-using Application.Extensions;
-using Domain.ValueObjects;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Topics
+﻿namespace Application.Topics
 {
     public class TopicsService(IApplicationDbContext dbContext, ILogger<TopicsService> logger) : ITopicsService
     {        
