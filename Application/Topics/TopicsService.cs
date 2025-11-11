@@ -37,12 +37,16 @@ namespace Application.Topics
             TopicId topicId = TopicId.Of(id);
             var topic = await dbContext.Topics.FindAsync(topicId);
 
-            if (topic is null)
+            if (topic is null || topic.IsDeleted)
             {
                 throw new TopicNotFoundException(id);
             }
 
-            dbContext.Topics.Remove(topic);
+            //dbContext.Topics.Remove(topic);
+
+            topic.IsDeleted = true;
+            topic.DeletedAt = DateTimeOffset.UtcNow;
+
             await dbContext.SaveChangesAsync(CancellationToken.None);
         }
 
@@ -51,7 +55,7 @@ namespace Application.Topics
             TopicId topicId = TopicId.Of(id);
             var result = await dbContext.Topics.FindAsync([topicId]);
 
-            if(result is null)
+            if(result is null || result.IsDeleted)
             {
                 throw new TopicNotFoundException(id);
             }
@@ -63,6 +67,7 @@ namespace Application.Topics
         {
             var topics = await dbContext.Topics
                     .AsNoTracking()
+                    .Where(t => !t.IsDeleted)
                     .ToListAsync();
 
             return topics.ToTopicResponseDtoList();
@@ -73,7 +78,7 @@ namespace Application.Topics
             TopicId topicId = TopicId.Of(id);
             var topic = await dbContext.Topics.FindAsync(topicId);
 
-            if(topic is null)
+            if(topic is null || topic.IsDeleted)
             {
                 throw new TopicNotFoundException(id);
             }
