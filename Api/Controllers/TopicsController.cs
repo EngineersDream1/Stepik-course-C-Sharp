@@ -1,17 +1,19 @@
+using Application.Topics.Queries.GetTopics;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TopicsController : ControllerBase
+    public class TopicsController(IMediator mediator) : ControllerBase
     {
         
 
         [HttpGet]
         public async Task<ActionResult<List<TopicResponseDto>>> GetTopics()
         {
-            return Ok(null);
+            return Ok(await mediator.Send(new GetTopicsQuery()));
 
         }
 
