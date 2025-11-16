@@ -1,7 +1,8 @@
-﻿namespace Application.Topics
+﻿namespace Application.Topics.Old
 {
+    [Obsolete("Сервис устарел!")]
     public class TopicsService(IApplicationDbContext dbContext, ILogger<TopicsService> logger) : ITopicsService
-    {        
+    {
         public async Task<TopicResponseDto> CreateTopicAsync(CreateTopicRequestDto dto)
         {
             Topic newTopic = Topic.Create(
@@ -42,7 +43,7 @@
             TopicId topicId = TopicId.Of(id);
             var result = await dbContext.Topics.FindAsync([topicId]);
 
-            if(result is null || result.IsDeleted)
+            if (result is null || result.IsDeleted)
             {
                 throw new TopicNotFoundException(id);
             }
@@ -65,7 +66,7 @@
             TopicId topicId = TopicId.Of(id);
             var topic = await dbContext.Topics.FindAsync(topicId);
 
-            if(topic is null || topic.IsDeleted)
+            if (topic is null || topic.IsDeleted)
             {
                 throw new TopicNotFoundException(id);
             }
@@ -73,12 +74,12 @@
             topic.Title = dto.Title ?? topic.Title;
             topic.Summary = dto.Summary ?? topic.Summary;
             topic.TopicType = dto.TopicType ?? topic.TopicType;
-            topic.EventStart = dto.EventStart ;
+            topic.EventStart = dto.EventStart;
             topic.Location = Location.Of(
                 dto.Location.City,
                 dto.Location.Street
             );
-            
+
             await dbContext.SaveChangesAsync(CancellationToken.None);
 
             return topic.ToTopicResponseDto();

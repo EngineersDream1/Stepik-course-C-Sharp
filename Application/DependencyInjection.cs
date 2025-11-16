@@ -1,5 +1,4 @@
-﻿using Application.Topics;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -8,7 +7,7 @@ namespace Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ITopicsService, TopicsService>();
+            //services.AddScoped<ITopicsService, TopicsService>();
 
             return services;
         }
