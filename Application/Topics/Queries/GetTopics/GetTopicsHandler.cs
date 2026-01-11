@@ -1,6 +1,4 @@
-﻿using Shared.CQRS;
-
-namespace Application.Topics.Queries.GetTopics
+﻿namespace Application.Topics.Queries.GetTopics
 {
     public class GetTopicsHandler(IApplicationDbContext dbContext)
         : IQueryHandler<GetTopicsQuery, GetTopicsResult>

@@ -1,6 +1,4 @@
 ﻿using Api.Exception.Handler;
-using Application.Topics.Queries.GetTopics;
-using Infrastructure.Data.Extensions;
 
 namespace Api
 {
