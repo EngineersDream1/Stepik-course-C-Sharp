@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Topics.Commands.UpdateTopic
 {
-    internal class UpdateTopicHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateTopicCommand, UpdateTopicResult>
+    internal class UpdateTopicHandler(IApplicationDbContext dbContext) 
+        : ICommandHandler<UpdateTopicCommand, UpdateTopicResult>
     {
         public async Task<UpdateTopicResult> Handle(UpdateTopicCommand request, CancellationToken cancellationToken)
         {
@@ -19,13 +20,13 @@ namespace Application.Topics.Commands.UpdateTopic
                 throw new TopicNotFoundException(request.TopicId);
             }
 
-            topic.Title = request.TopicDto.Title ?? topic.Title;
-            topic.Summary = request.TopicDto.Summary ?? topic.Summary;
-            topic.TopicType = request.TopicDto.TopicType ?? topic.TopicType;
-            topic.EventStart = request.TopicDto.EventStart;
-            topic.Location = Location.Of(
-                request.TopicDto.Location.City,
-                request.TopicDto.Location.Street
+            topic.Update(
+                request.UpdateTopicDto.Title,
+                request.UpdateTopicDto.Summary,
+                request.UpdateTopicDto.TopicType,
+                request.UpdateTopicDto.EventStart,
+                request.UpdateTopicDto.Location.City,
+                request.UpdateTopicDto.Location.Street
             );
 
             await dbContext.SaveChangesAsync(CancellationToken.None);
