@@ -1,4 +1,5 @@
 ﻿using Application.Topics.Commands.CreateTopic;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Topics.Commands.UpdateTopic
 {
-    internal class UpdateTopicHandler(IApplicationDbContext dbContext) 
+    public class UpdateTopicHandler(IApplicationDbContext dbContext, IMapper mapper) 
         : ICommandHandler<UpdateTopicCommand, UpdateTopicResult>
     {
         public async Task<UpdateTopicResult> Handle(UpdateTopicCommand request, CancellationToken cancellationToken)
@@ -20,14 +21,7 @@ namespace Application.Topics.Commands.UpdateTopic
                 throw new TopicNotFoundException(request.TopicId);
             }
 
-            topic.Update(
-                request.UpdateTopicDto.Title,
-                request.UpdateTopicDto.Summary,
-                request.UpdateTopicDto.TopicType,
-                request.UpdateTopicDto.EventStart,
-                request.UpdateTopicDto.Location.City,
-                request.UpdateTopicDto.Location.Street
-            );
+            mapper.Map(request.UpdateTopicDto, topic);
 
             await dbContext.SaveChangesAsync(CancellationToken.None);
 

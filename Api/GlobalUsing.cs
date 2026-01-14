@@ -10,3 +10,4 @@ global using Application.Topics.Commands.CreateTopic;
 global using Application.Topics.Commands.UpdateTopic;
 global using Application.Topics.Commands.DeleteTopic;
 global using MediatR;
+global using Application.Mapping;
