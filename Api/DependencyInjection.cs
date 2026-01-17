@@ -1,4 +1,5 @@
 ﻿using Api.Exception.Handler;
+using Api.Middleware;
 using Api.Security.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -41,6 +42,8 @@ namespace Api
         public static WebApplication UseApiServices(this WebApplication app)
         {
             app.UseCors("react-policy");
+
+            //app.UseMiddleware<ValidationMiddleware>();
 
             if (app.Environment.IsDevelopment())
             {
