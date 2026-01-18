@@ -1,9 +1,6 @@
 ﻿using Application.Data.DataBaseContext;
-using Domain.Models;
 using Domain.Security;
-using Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Infrastructure.Data.DataBaseContext
