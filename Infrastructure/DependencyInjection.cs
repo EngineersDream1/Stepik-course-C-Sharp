@@ -12,7 +12,7 @@ namespace Infrastructure
         {
             var connectionString = configuration.GetConnectionString("SqLiteConnection");
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<Data.DataBaseContext.ApplicationDbContext>(options =>
             {
                 options.UseSqlite(connectionString);
             });

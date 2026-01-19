@@ -3,11 +3,11 @@ using Domain.Security;
 using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Auth.Commands.Login
+namespace Application.Auth.Queries.Login
 {
-    public class LoginCommandHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurityService) : ICommandHandler<LoginCommand, IdentityUserResponseDto>
+    public class LoginQueryHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurityService) : IQueryHandler<LoginQuery, LoginResult>
     {
-        public async Task<IdentityUserResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginResult> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             var user = await manager.FindByEmailAsync(request.LoginDto.Email);
 
@@ -26,7 +26,7 @@ namespace Application.Auth.Commands.Login
                     jwtSecurityService.CreateToken(user)
                 );
 
-                return response;
+                return new LoginResult(response);
             }
 
             throw new NotFoundException("По введенным данным пользователь не найден!");

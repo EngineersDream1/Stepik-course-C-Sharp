@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Auth.Commands.Login
+namespace Application.Auth.Queries.Login
 {
-    public record LoginCommand(LoginRequestDto LoginDto) : ICommand<LoginResult>;
+    public record LoginQuery(LoginRequestDto LoginDto) : IQuery<LoginResult>;
 
     public record LoginResult(IdentityUserResponseDto Result);
-    
+
 }
