@@ -1,12 +1,7 @@
-﻿using Application.Security.Services;
+﻿using Application.Auth.Dtos;
+using Application.Security.Services;
 using Domain.Security;
-using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Auth.Commands.Register
 {
@@ -56,7 +51,7 @@ namespace Application.Auth.Commands.Register
 
             var token = jwtSecurityService.CreateToken(user);
 
-            var response = new IdentityUserResponseDto(
+            var response = new AuthResponseDto(
                 user.UserName!,
                 user.Email!,
                 token

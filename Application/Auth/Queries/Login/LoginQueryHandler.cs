@@ -1,6 +1,6 @@
-﻿using Application.Security.Services;
+﻿using Application.Auth.Dtos;
+using Application.Security.Services;
 using Domain.Security;
-using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Identity;
 
 namespace Application.Auth.Queries.Login
@@ -23,7 +23,7 @@ namespace Application.Auth.Queries.Login
 
             if (result)
             {
-                var response = new IdentityUserResponseDto(
+                var response = new AuthResponseDto(
                     user.UserName!,
                     user.Email!,
                     jwtSecurityService.CreateToken(user)

@@ -1,13 +1,8 @@
 ﻿using Application.Auth.Commands.Register;
+using Application.Auth.Dtos;
 using Application.Auth.Queries.Login;
-using Application.Security.Services;
-using Domain.Security;
-using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
 {
@@ -17,7 +12,7 @@ namespace Api.Controllers
     public class AuthController(IMediator mediator) : ControllerBase
     {
         [HttpPost("login")]
-        public async Task<IResult> login(LoginRequestDto dto)
+        public async Task<IResult> login(LoginDto dto)
         {
             var query = new LoginQuery(dto);
             var result = await mediator.Send(query);
@@ -26,7 +21,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IResult> Register(RegisterUserRequestDto dto)
+        public async Task<IResult> Register(RegisterDto dto)
         {
             var command = new RegisterCommand(dto);
             var result = await mediator.Send(command);

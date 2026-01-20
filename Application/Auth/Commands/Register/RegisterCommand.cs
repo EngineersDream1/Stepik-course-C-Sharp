@@ -1,9 +1,10 @@
-﻿using Domain.Security.Dtos;
+﻿using Application.Auth.Dtos;
+using Domain.Security.Dtos;
 
 namespace Application.Auth.Commands.Register
 {
-    public record RegisterCommand(RegisterUserRequestDto RegisterDto)
+    public record RegisterCommand(RegisterDto RegisterDto)
         : ICommand<RegisterResult>;
 
-    public record RegisterResult(IdentityUserResponseDto Result);
+    public record RegisterResult(AuthResponseDto Result);
 }
