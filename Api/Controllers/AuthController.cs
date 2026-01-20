@@ -1,4 +1,5 @@
-﻿using Application.Auth.Queries.Login;
+﻿using Application.Auth.Commands.Register;
+using Application.Auth.Queries.Login;
 using Application.Security.Services;
 using Domain.Security;
 using Domain.Security.Dtos;
@@ -18,69 +19,20 @@ namespace Api.Controllers
         [HttpPost("login")]
         public async Task<IResult> login(LoginRequestDto dto)
         {
-            //var user = await manager.FindByEmailAsync(dto.Email);
-
-            //if (user == null)
-            //{
-            //    return Results.Unauthorized();
-            //}
-
-            //var result = await manager.CheckPasswordAsync(user, dto.Password);
-
-            //if(result)
-            //{
-            //    var response = new IdentityUserResponseDto(
-            //        user.UserName!,
-            //        user.Email!,
-            //        jwtSecurityService.CreateToken(user)
-            //    );
-
-            //    return Results.Ok(new {result = response});
-            //}
-
-            //return Results.Unauthorized();
-
             var query = new LoginQuery(dto);
             var result = await mediator.Send(query);
 
             return Results.Ok(new { result = result.Result });
-
         }
 
         [HttpPost("register")]
         public async Task<IResult> Register(RegisterUserRequestDto dto)
         {
-            //if(await manager.Users.AnyAsync(u => u.UserName == dto.Username))
-            //{
-            //    return Results.BadRequest("Username занят");
-            //}
+            var command = new RegisterCommand(dto);
+            var result = await mediator.Send(command);
 
-            //if(await manager.Users.AnyAsync(u => u.Email == dto.Email))
-            //{
-            //    return Results.BadRequest("Email занят");
-            //}
+            return Results.Ok(new {result = result.Result});
 
-            //var user = new CustomIdentityUser
-            //{
-            //    FullName = dto.FullName,
-            //    Email = dto.Email,
-            //    UserName = dto.Username,
-            //    About = String.Empty
-            //};
-
-            //var result = await manager.CreateAsync(user, dto.Password);
-
-            //if(result.Succeeded)
-            //{
-            //    var response = new IdentityUserResponseDto(
-            //        user.UserName!, user.Email!, jwtSecurityService.CreateToken(user)
-            //    );
-            //    return Results.Ok(new { result = response });
-            //}
-
-            //return Results.BadRequest(result.Errors);
-
-            throw new NotImplementedException();
         }
     }
 }
