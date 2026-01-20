@@ -1,6 +1,6 @@
-## Рефакторинг системы аутентификации и авторизации
+## Р РµС„Р°РєС‚РѕСЂРёРЅРі СЃРёСЃС‚РµРјС‹ Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРё Рё Р°РІС‚РѕСЂРёР·Р°С†РёРё
 
-## Технологический стек
+## РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРёР№ СЃС‚РµРє
 - .NET 9.0
 - ASP.NET Core Web API
 - Entity Framework Core 9.0
@@ -11,33 +11,33 @@
 - ASP.NET Core Identity
 
 
-## Архитектура проекта
+## РђСЂС…РёС‚РµРєС‚СѓСЂР° РїСЂРѕРµРєС‚Р°
 
-### Текущая структура слоев:
-- Api - Presentation слой (контроллеры, middleware)
-- Application - Application слой (CQRS handlers, DTOs, бизнес-логика)
-- Domain - Domain слой (сущности, value objects, доменные исключения)
-- Infrastructure - Infrastructure слой (DbContext, миграции, конфигурации EF)
-- Shared - Общие интерфейсы CQRS
+### РўРµРєСѓС‰Р°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° СЃР»РѕРµРІ:
+- Api - Presentation СЃР»РѕР№ (РєРѕРЅС‚СЂРѕР»Р»РµСЂС‹, middleware)
+- Application - Application СЃР»РѕР№ (CQRS handlers, DTOs, Р±РёР·РЅРµСЃ-Р»РѕРіРёРєР°)
+- Domain - Domain СЃР»РѕР№ (СЃСѓС‰РЅРѕСЃС‚Рё, value objects, РґРѕРјРµРЅРЅС‹Рµ РёСЃРєР»СЋС‡РµРЅРёСЏ)
+- Infrastructure - Infrastructure СЃР»РѕР№ (DbContext, РјРёРіСЂР°С†РёРё, РєРѕРЅС„РёРіСѓСЂР°С†РёРё EF)
+- Shared - РћР±С‰РёРµ РёРЅС‚РµСЂС„РµР№СЃС‹ CQRS
 
 ## API Endpoints
 
 ### Topics
-- `GET /api/topics` - Получить все топики
-- `GET /api/topics/{id}` - Получить топик по ID
-- `POST /api/topics` - Создать топик
-- `PUT /api/topics/{id}` - Обновить топик
-- `DELETE /api/topics/{id}` - Удалить топик (soft delete)
+- `GET /api/topics` - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ С‚РѕРїРёРєРё
+- `GET /api/topics/{id}` - РџРѕР»СѓС‡РёС‚СЊ С‚РѕРїРёРє РїРѕ ID
+- `POST /api/topics` - РЎРѕР·РґР°С‚СЊ С‚РѕРїРёРє
+- `PUT /api/topics/{id}` - РћР±РЅРѕРІРёС‚СЊ С‚РѕРїРёРє
+- `DELETE /api/topics/{id}` - РЈРґР°Р»РёС‚СЊ С‚РѕРїРёРє (soft delete)
 
 ### Authentication
-- `POST /api/auth/login` - Авторизация
-- `POST /api/auth/register` - Регистрация
+- `POST /api/auth/login` - РђРІС‚РѕСЂРёР·Р°С†РёСЏ
+- `POST /api/auth/register` - Р РµРіРёСЃС‚СЂР°С†РёСЏ
 
 ### AspNetUsers
-- Стандартные таблицы ASP.NET Core Identity
+- РЎС‚Р°РЅРґР°СЂС‚РЅС‹Рµ С‚Р°Р±Р»РёС†С‹ ASP.NET Core Identity
 
-### Безопасность
-- JWT токены с коротким временем жизни (10 минут)
-- HMAC SHA512 подпись
-- CORS настроен для React приложения на localhost:3000
-- Все endpoints защищены аутентификацией (кроме /api/auth/*)
+### Р‘РµР·РѕРїР°СЃРЅРѕСЃС‚СЊ
+- JWT С‚РѕРєРµРЅС‹ СЃ РєРѕСЂРѕС‚РєРёРј РІСЂРµРјРµРЅРµРј Р¶РёР·РЅРё (10 РјРёРЅСѓС‚)
+- HMAC SHA512 РїРѕРґРїРёСЃСЊ
+- CORS РЅР°СЃС‚СЂРѕРµРЅ РґР»СЏ React РїСЂРёР»РѕР¶РµРЅРёСЏ РЅР° localhost:3000
+- Р’СЃРµ endpoints Р·Р°С‰РёС‰РµРЅС‹ Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРµР№ (РєСЂРѕРјРµ /api/auth/*)
