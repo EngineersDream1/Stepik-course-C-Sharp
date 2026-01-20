@@ -7,8 +7,9 @@
 - PostgreSQL
 - MediatR (CQRS)
 - AutoMapper
-- ASP.NET Core Identity
 - JWT Authentication
+- ASP.NET Core Identity
+
 
 ## Архитектура проекта
 
