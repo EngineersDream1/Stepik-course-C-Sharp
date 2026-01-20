@@ -16,7 +16,7 @@ namespace Application.Auth.Queries.Login
 
             if (user == null)
             {
-                throw new NotFoundException("Не найден пользователь с таким Email!");
+                throw new UnauthorizedException("Не найден пользователь с таким Email!");
             }
 
             var result = await manager.CheckPasswordAsync(user, request.LoginDto.Password);
@@ -33,10 +33,8 @@ namespace Application.Auth.Queries.Login
             }
             else
             {
-                throw new NotFoundException("Неверный пароль!");
+                throw new UnauthorizedException("Неверный пароль!");
             }
-
-            throw new NotFoundException("По введенным данным пользователь не найден!");
         }
     }
 }
