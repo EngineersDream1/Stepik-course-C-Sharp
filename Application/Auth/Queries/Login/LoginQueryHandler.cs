@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Application.Auth.Queries.Login
 {
-    public class LoginQueryHandler(UserManager<CustomIdentityUser> manager, IJwtSecurityService jwtSecurityService) : IQueryHandler<LoginQuery, LoginResult>
+    public class LoginQueryHandler(
+        UserManager<CustomIdentityUser> manager,
+        IJwtSecurityService jwtSecurityService) 
+        : IQueryHandler<LoginQuery, LoginResult>
     {
         public async Task<LoginResult> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
@@ -27,6 +30,10 @@ namespace Application.Auth.Queries.Login
                 );
 
                 return new LoginResult(response);
+            }
+            else
+            {
+                throw new NotFoundException("Неверный пароль!");
             }
 
             throw new NotFoundException("По введенным данным пользователь не найден!");
